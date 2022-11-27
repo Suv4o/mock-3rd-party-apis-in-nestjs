@@ -1,0 +1,5 @@
+# Get Good Moring World
+GET http://localhost:3000/good-morning-world HTTP/1.1
+content-type: application/json
+
+{}
