@@ -40,4 +40,25 @@ export class AppService {
       throw new BadRequestException(error);
     }
   }
+
+  async createMessage(message: string) {
+    try {
+      const response = await this.httpService.axiosRef({
+        method: 'POST',
+        baseURL: 'https://api.example.com',
+        url: '/create-message',
+        data: {
+          message,
+        },
+        headers: {
+          Authorization: 'Bearer some_test_token',
+          'Content-Type': 'application/json',
+        },
+      });
+
+      return response.data;
+    } catch (error) {
+      throw new BadRequestException(error);
+    }
+  }
 }

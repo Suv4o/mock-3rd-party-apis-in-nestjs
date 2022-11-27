@@ -50,11 +50,22 @@ export const getGoodMorningPerson = () => {
 };
 
 export const createMessage = () => {
-  return rest.post(BASE_DOMAIN + '/create-message', (req, res, ctx) => {
+  return rest.post(BASE_DOMAIN + '/create-message', async (req, res, ctx) => {
     const authHeader = req.headers.get('authorization');
     const [bearerHeader, bearerToken] = authHeader
       ? authHeader?.split(' ')
       : [];
+    const { message } = await req.json();
+
+    if (!message) {
+      return res(
+        ctx.status(400),
+        ctx.json({
+          status: 'error',
+          message: 'Message is required',
+        }),
+      );
+    }
 
     if (!authHeader || bearerHeader !== 'Bearer' || !bearerToken) {
       return res(
@@ -69,7 +80,7 @@ export const createMessage = () => {
     return res(
       ctx.status(201),
       ctx.json({
-        success: true,
+        message,
       }),
     );
   });

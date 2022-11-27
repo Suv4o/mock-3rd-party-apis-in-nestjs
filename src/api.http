@@ -9,3 +9,11 @@ GET http://localhost:3000/good-morning?person=Aleks HTTP/1.1
 content-type: application/json
 
 {}
+
+### Create Message
+POST http://localhost:3000/create-message HTTP/1.1
+content-type: application/json
+
+{
+    "message": "Hello World"
+}
