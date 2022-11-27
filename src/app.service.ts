@@ -22,4 +22,22 @@ export class AppService {
       throw new BadRequestException(error);
     }
   }
+
+  async getHelloPerson(person: string) {
+    try {
+      const response = await this.httpService.axiosRef({
+        method: 'GET',
+        baseURL: 'https://api.example.com',
+        url: '/good-morning?person=' + person,
+        headers: {
+          Authorization: 'Bearer some_test_token',
+          'Content-Type': 'application/json',
+        },
+      });
+
+      return response.data;
+    } catch (error) {
+      throw new BadRequestException(error);
+    }
+  }
 }
